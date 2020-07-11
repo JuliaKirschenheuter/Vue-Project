@@ -20,6 +20,9 @@ export const router = new VueRouter({
         {
             path: '/meetups/:meetupId',
             name: 'meetup-page',
+            meta: {
+                showBackToList: true,
+            },
             component: () => import('@/views/MeetupPage'),
         }
     ]

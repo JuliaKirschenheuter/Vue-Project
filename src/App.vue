@@ -4,7 +4,9 @@
       <header class="header">
         <div>
           <h1>
-            <router-link :to="{name: 'index'}">
+            <router-link
+                    v-if="$route.meta.showBackToList"
+                    :to="{name: 'index'}">
               <img src="@/assets/logo.svg" alt="Meetups" />
             </router-link>
           </h1>
