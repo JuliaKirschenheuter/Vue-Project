@@ -21,7 +21,7 @@
             <p>
                 <button @click="go('meetup-agenda')">Agenda</button>
             </p>
-            <router-view/>
+            <router-view :meetup="meetup"/>
         </template>
         <template v-else>
             spinner...
@@ -54,7 +54,7 @@
         },
 
         beforeRouteUpdate(to, from, next) {
-            if (Number(to.params.meetupId) > 3) {
+            if (Number(to.params.meetupId) > 5) {
                 next(false);
                 return;
             }

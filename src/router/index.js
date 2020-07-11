@@ -28,12 +28,14 @@ export const router = new VueRouter({
                 {
                     path: 'description',
                     name: 'meetup-description',
-                    component: () => import('@/views/MeetupDescriptionPage')
+                    component: () => import('@/views/MeetupDescriptionPage'),
+                    props: true
                 },
                 {
                     path: 'agenda',
                     name: 'meetup-agenda',
-                    component: () => import('@/views/MeetupAgendaPage')
+                    component: () => import('@/views/MeetupAgendaPage'),
+                    props: true
                 }
             ]
         }
