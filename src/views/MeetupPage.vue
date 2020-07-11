@@ -17,6 +17,9 @@
             </p>
             <router-view/>
         </template>
+        <template v-else>
+            spinner...
+        </template>
 
     </div>
 
@@ -35,6 +38,15 @@
                 meetup: null
             }
         },
+
+        beforeRouteEnter(to, from, next) {
+            fetchMetup(to.params.meetupId).then(meetup => {
+                next(vm => {
+                    vm.setMeetup(meetup)
+                })
+            })
+        },
+
         mounted() {
             fetchMetup(this.$route.params.meetupId).then(meetup => this.setMeetup(meetup));
         },
