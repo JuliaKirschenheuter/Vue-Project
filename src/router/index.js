@@ -9,10 +9,12 @@ export const router = new VueRouter({
     routes: [
         {
             path: '/',
+            name: 'index',
             component: () => import('@/views/MeetupsPage'),
         },
         {
             path: '/meetups/:meetupId',
+            name: 'meetup-page',
             component: () => import('@/views/MeetupPage'),
         }
     ]
