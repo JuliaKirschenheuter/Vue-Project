@@ -10,6 +10,12 @@
                 <router-link to="/meetups/2">Go to 2 </router-link>
             </p>
             <p>
+                <router-link to="/meetups/3">Go to 3 </router-link>
+            </p>
+            <p>
+                <router-link to="/meetups/4">Go to 4</router-link>
+            </p>
+            <p>
                 <button @click="go('meetup-description')">Description</button>
             </p>
             <p>
@@ -45,6 +51,17 @@
                     vm.setMeetup(meetup)
                 })
             })
+        },
+
+        beforeRouteUpdate(to, from, next) {
+            if (Number(to.params.meetupId) > 3) {
+                next(false);
+                return;
+            }
+            fetchMetup(to.params.meetupId).then(meetup => {
+                this.setMeetup(meetup)
+                next();
+            });
         },
 
         mounted() {
