@@ -24,6 +24,18 @@ export const router = new VueRouter({
                 showBackToList: true,
             },
             component: () => import('@/views/MeetupPage'),
+            children: [
+                {
+                    path: 'description',
+                    name: 'meetup-description',
+                    component: () => import('@/views/MeetupDescriptionPage')
+                },
+                {
+                    path: 'agenda',
+                    name: 'meetup-agenda',
+                    component: () => import('@/views/MeetupAgendaPage')
+                }
+            ]
         }
     ]
 })
