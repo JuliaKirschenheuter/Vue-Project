@@ -15,7 +15,7 @@ export const router = new VueRouter({
         {
             path: '/meetups',
             name: 'meetups-list',
-            redirect: '/'
+            component: () => import('@/views/MeetupsPage'),
         },
         {
             path: '/meetups/:meetupId',
