@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import MeetupsPage from "@/views/MeetupsPage";
-import MeetupPage from "@/views/MeetupPage";
 
 Vue.use(VueRouter);
 
@@ -11,11 +9,11 @@ export const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: MeetupsPage,
+            component: () => import('@/views/MeetupsPage'),
         },
         {
             path: '/meetups/:meetupId',
-            component: MeetupPage
+            component: () => import('@/views/MeetupPage'),
         }
     ]
 })
