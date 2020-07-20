@@ -138,7 +138,7 @@ export default {
     },
 
     viewComponent() {
-      return this.view === 'list' ? MeetupsList : MeetupsCalendar
+      return this.filter.view === 'list' ? MeetupsList : MeetupsCalendar
     }
   },
 
