@@ -27,6 +27,12 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <app-input v-model="value" ref="input" />
+      <p>value = {{ value }}</p>
+    </div>
+
+
     <transition
       v-if="filteredMeetups && filteredMeetups.length"
       name="fade"
@@ -48,6 +54,7 @@ import FormCheck from '@/components/FormCheck';
 import AppEmpty from '@/components/AppEmpty';
 import { API_URL, fetchMeetups } from '@/data';
 import AppIcon from '@/components/AppIcon';
+import AppInput from '@/components/AppInput';
 
 export default {
   name: 'MeetupsPage',
@@ -59,10 +66,12 @@ export default {
     FormCheck,
     AppEmpty,
     AppIcon,
+    AppInput,
   },
 
   data() {
     return {
+      value: '1',
       meetups: [],
       filter: {
         date: '',
