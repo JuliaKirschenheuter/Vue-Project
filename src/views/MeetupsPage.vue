@@ -28,7 +28,12 @@
     </div>
 
     <div class="form-group">
-      <app-input v-model="value" ref="input" />
+      <app-input v-model="value" ref="input">
+        <template #left-icon>
+            <app-icon icon="search"></app-icon>
+        </template>
+
+      </app-input>
       <p>value = {{ value }}</p>
     </div>
 

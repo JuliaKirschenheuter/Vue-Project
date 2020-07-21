@@ -1,6 +1,9 @@
 <template>
     <!--  input-group_icon input-group_icon-left form-control_rounded form-control_sm -->
-    <div class="input-group">
+    <div class="input-group" :class="{
+        'input-group_icon': hasIcon,
+        'input-group_icon-left': hasIcon
+    }">
         <slot name="left-icon"></slot>
         <input class="form-control" :value="value" v-bind="$attrs" v-on="listeners"/>
     </div>
@@ -27,7 +30,12 @@
                     input: ($event) => this.$emit('input', $event.target.value),
                 };
             },
+            hasIcon() {
+                return !!this.$slots['left-icon'];
+            }
         },
+
+
     };
 </script>
 
