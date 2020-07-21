@@ -28,8 +28,8 @@
     </div>
 
     <div class="form-group">
-      <app-input v-model="value" ref="input">
-        <template #left-icon>
+      <app-input v-model="value" ref="input" @click="showIcon =!showIcon">
+        <template #left-icon v-if="showIcon">
             <app-icon icon="search"></app-icon>
         </template>
 
@@ -77,6 +77,7 @@ export default {
   data() {
     return {
       value: '1',
+      showIcon: false,
       meetups: [],
       filter: {
         date: '',

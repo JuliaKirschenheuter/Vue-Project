@@ -18,6 +18,16 @@
             value: {}
         },
 
+        data() {
+            return {
+                hasIcon: !!this.$slots['left-icon']
+            }
+        },
+
+        updated() {
+            this.hasIcon = !!this.$slots['left-icon']
+        },
+
         model: {
             prop: 'value',
             event: 'input',
@@ -30,9 +40,6 @@
                     input: ($event) => this.$emit('input', $event.target.value),
                 };
             },
-            hasIcon() {
-                return !!this.$slots['left-icon'];
-            }
         },
 
 
