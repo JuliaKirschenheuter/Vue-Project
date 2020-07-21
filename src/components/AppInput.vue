@@ -2,7 +2,7 @@
     <!--  input-group_icon input-group_icon-left form-control_rounded form-control_sm -->
     <div class="input-group">
         <slot name="left-icon"></slot>
-        <input class="form-control" v-bind="$attrs" v-on="listeners"/>
+        <input class="form-control" :value="value" v-bind="$attrs" v-on="listeners"/>
     </div>
 </template>
 
