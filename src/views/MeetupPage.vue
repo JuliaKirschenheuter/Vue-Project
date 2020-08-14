@@ -15,7 +15,7 @@
       <p>
         <button @click="go('meetup-agenda')">Agenda</button>
       </p>
-      <router-view/>
+      <router-view :meetup="meetup"/>
     </template>
     <template v-else>
       spinner...
