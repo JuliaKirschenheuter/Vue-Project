@@ -45,6 +45,13 @@ export default {
     })
   },
 
+  beforeRouteUpdate(to, from, next) {
+    fetchMeetup(to.params.meetupId).then(meetup => {
+      this.setMeetup(meetup);
+      next();
+    })
+  },
+
   computed: {
     paramMeetupId() {
       return this.$route.params.meetupId;
