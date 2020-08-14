@@ -4,9 +4,9 @@
       <header class="header">
         <div>
           <h1>
-            <a href="/">
+            <router-link :to="{name: 'index'}">
               <img src="@/assets/logo.svg" alt="Meetups" />
-            </a>
+            </router-link>
           </h1>
         </div>
         <nav>
