@@ -1,11 +1,17 @@
 <template>
+  <div>
+    <p>{{ $route.fullPath }}</p>
+    <p>{{ $route.hash }}</p>
+    <p>{{ $route.path }}</p>
+    <p>{{ $route.query }}</p>
+    <p>{{ $route.params }}</p>
+  </div>
 
-  <div>{{ $route.fullPath }}</div>
 </template>
 
 <script>
 export default {
-name: "MeetupPage"
+  name: "MeetupPage"
 }
 
 </script>
