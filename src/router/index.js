@@ -22,6 +22,7 @@ export const router = new VueRouter({
       children: [
         {
           path: 'description',
+          alias: '',
           name: 'meetup-description',
           component: () => import('@/views/MeetupDescriptionPage'),
           props: true
@@ -30,7 +31,7 @@ export const router = new VueRouter({
           path: 'agenda',
           name: 'meetup-agenda',
           component: () => import('@/views/MeetupAgendaPage'),
-          props: true
+          props: true,
         }
       ]
     }
