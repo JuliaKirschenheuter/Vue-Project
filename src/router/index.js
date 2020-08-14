@@ -11,18 +11,26 @@ export const router = new VueRouter({
       name: 'index',
       component: () => import('@/views/MeetupsPage')
     },
-    {
-      path: '/meetups',
-      name: 'meetups-list',
-      component: () => import('@/views/MeetupsPage')
-    },
+
     {
       path: '/meetups/:meetupId',
       name: 'meetup-page',
       meta: {
         showBackToList: true
       },
-      component: () => import('@/views/MeetupPage')
+      component: () => import('@/views/MeetupPage'),
+      children: [
+        {
+          path: 'description',
+          name: 'meetup-description',
+          component: () => import('@/views/MeetupDescriptionPage')
+        },
+        {
+          path: 'agenda',
+          name: 'meetup-agenda',
+          component: () => import('@/views/MeetupAgendaPage')
+        }
+      ]
     }
   ]
 })

@@ -17,3 +17,7 @@ export function getMeetupCoverLink(meetup) {
 export async function fetchMeetups() {
   return fetch(`${API_URL}/meetups`).then(res => res.json());
 }
+
+export async function fetchMeetup(id) {
+  return fetch(`/api/meetups/${id}`).then(res => res.json())
+}
