@@ -17,7 +17,9 @@
       </p>
       <router-view/>
     </template>
-
+    <template v-else>
+      spinner...
+    </template>
   </div>
 
 </template>
@@ -33,6 +35,14 @@ export default {
     return {
       meetup: null
     }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    fetchMeetup(to.params.meetupId).then(meetup => {
+      next(vm => {
+        vm.setMeetup(meetup)
+      })
+    })
   },
 
   computed: {
