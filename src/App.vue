@@ -10,7 +10,7 @@
           </h1>
         </div>
         <nav>
-          <router-link :to="{name: 'meetups-list'}">&larr; Вернуться к списку</router-link>
+          <router-link v-if="$route.meta.showBackToList" :to="{name: 'meetups-list'}">&larr; Вернуться к списку</router-link>
           <a href="#">Вход</a>
           <a href="#">Регистрация</a>
           <a href="#">Создать митап</a>
