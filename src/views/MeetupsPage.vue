@@ -32,7 +32,10 @@
       name="fade"
       mode="out-in"
     >
-      <component :is="viewComponent" :meetups="filteredMeetups"></component>
+      <keep-alive>
+        <component :is="viewComponent" :meetups="filteredMeetups"></component>
+      </keep-alive>
+
     </transition>
     <app-empty v-else>Митапов по заданным условям не найдено...</app-empty>
   </div>
