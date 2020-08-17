@@ -32,15 +32,7 @@
       name="fade"
       mode="out-in"
     >
-      <meetups-list
-        v-if="filter.view === '' || filter.view === 'list'"
-        :meetups="filteredMeetups"
-        key="list"
-      ></meetups-list>
-      <meetups-calendar
-        v-else-if="filter.view === 'calendar'"
-        key="calendar"
-      ></meetups-calendar>
+      <component :is="viewComponent" :meetups="filteredMeetups"></component>
     </transition>
     <app-empty v-else>Митапов по заданным условям не найдено...</app-empty>
   </div>
@@ -135,6 +127,10 @@ export default {
 
       return filteredMeetups;
     },
+
+    viewComponent() {
+      return this.filter.view === '' || this.filter.view === 'list' ? MeetupsList : MeetupsCalendar
+    }
   },
 
   methods: {
