@@ -13,7 +13,7 @@
           <router-link v-if="$route.meta.showBackToList" :to="{name: 'index'}">&larr; Вернуться к списку</router-link>
           <a href="#">Вход</a>
           <a href="#">Регистрация</a>
-          <a href="#">Создать митап</a>
+          <router-link :to="{name: 'new-meetup'}">Создать митап</router-link>
         </nav>
       </header>
       <main class="main">

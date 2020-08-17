@@ -11,7 +11,11 @@ export const router = new VueRouter({
       name: 'index',
       component: () => import('@/views/MeetupsPage')
     },
-
+    {
+      path: '/create-meetup',
+      name: 'new-meetup',
+      component: () => import('@/views/CreateNewMeetup'),
+    },
     {
       path: '/meetups/:meetupId',
       name: 'meetup-page',
