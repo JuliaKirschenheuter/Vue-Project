@@ -1,5 +1,8 @@
 <template>
-  <div class="input-group">
+  <div class="input-group" :class="{
+    'input-group_icon': hasIcon,
+    'input-group_icon-left': hasIcon
+  }">
     <slot name="left-icon"></slot>
     <input v-bind:required="$attrs" v-on="listeners" class="form-control"/>
   </div>
@@ -12,6 +15,17 @@ export default {
   props: {
     value: {}
   },
+
+  data() {
+    return {
+      hasIcon: !!this.$slots['left-icon']
+    }
+  },
+
+  updated() {
+    this.hasIcon = !!this.$slots['left-icon']
+  },
+
   computed: {
     listeners() {
       return {
@@ -20,7 +34,7 @@ export default {
           this.$emit('input', $event.target.value)
         }
       }
-    }
+    },
   }
 }
 

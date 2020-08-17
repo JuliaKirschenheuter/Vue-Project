@@ -28,7 +28,11 @@
     </div>
 
     <div class="form-group">
-      <app-input v-model="value"></app-input>
+      <app-input v-model="value" ref="input" @click="showIcon =!showIcon">
+        <template #left-icon v-if="showIcon">
+          <app-icon icon="search"></app-icon>
+        </template>
+      </app-input>
       <p>value = {{value}}</p>
     </div>
 
@@ -84,6 +88,7 @@ export default {
         { text: 'Ожидаемые', value: 'future' },
       ],
       value: '',
+      showIcon: false
     };
   },
 
