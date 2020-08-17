@@ -1,13 +1,27 @@
 <template>
   <div class="input-group">
     <slot name="left-icon"></slot>
-    <input class="form-control"/>
+    <input v-bind:required="$attrs" v-on="listeners" class="form-control"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "AppInput"
+  inheritAttrs: false,
+  name: "AppInput",
+  props: {
+    value: {}
+  },
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: ($event) => {
+          this.$emit('input', $event.target.value)
+        }
+      }
+    }
+  }
 }
 
 </script>
