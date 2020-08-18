@@ -15,10 +15,11 @@
 
         <h3 class="form__section-title">Программа</h3>
         <meetup-agenda-item-form
-            :agenda-item.sync="agendaItem"
             v-for="(agendaItem, idx) in meetup_.agenda"
             :key="agendaItem.id"
             @remove="removeAgendaItem(idx)"
+            :agenda-item="agendaItem"
+            @update:agendaItem="updateAgendaItem(idx, $event)"
         />
 
         <div class="form-section_append">
