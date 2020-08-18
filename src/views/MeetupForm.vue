@@ -5,21 +5,20 @@
         <fieldset class="form-section">
           <div class="form-group">
             <label class="form-label">Название</label>
-            <input class="form-control" v-model="meetup_.title" @change="handleChange"/>
+            <input class="form-control" v-model="meetup_.title"/>
           </div>
           <div class="form-group">
             <label class="form-label">Место проведения</label>
-            <input class="form-control" v-model="meetup_.place" @change="handleChange"/>
+            <input class="form-control" v-model="meetup_.place"/>
           </div>
         </fieldset>
 
         <h3 class="form__section-title">Программа</h3>
         <meetup-agenda-item-form
+            :agenda-item.sync="agendaItem"
             v-for="(agendaItem, idx) in meetup_.agenda"
-            :agenda-item="agendaItem"
             :key="agendaItem.id"
             @remove="removeAgendaItem(idx)"
-            @change="updateAgendaItem(idx, $event)"
         />
 
         <div class="form-section_append">
@@ -84,30 +83,29 @@ export default {
     MeetupAgendaItemForm
   },
 
+  watch: {
+    meetup_: {
+      deep: true,
+      handler(newValue) {
+        this.$emit('update:meetup', deepClone(newValue));
+      }
+    }
+  },
+
   methods: {
     removeAgendaItem(idx) {
       this.meetup_.agenda.splice(idx, 1);
-      this.handleChange();
     },
 
     addAgendaItem() {
       const newAgendaItem = buildAgendaItem();
       this.meetup_.agenda.push(newAgendaItem);
-      this.handleChange()
-    },
-
-    onSubmit() {
-      this.$emit('submit', deepClone(this.meetup_))
     },
 
     updateAgendaItem(idx, newItem) {
       this.meetup_.agenda.splice(idx, 1, newItem);
-      this.handleChange()
     },
 
-    handleChange() {
-      this.$emit('change', deepClone(this.meetup_))
-    }
   }
 
 }

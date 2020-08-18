@@ -5,7 +5,7 @@
     </button>
 
     <div class="form-group">
-      <select title="Тип" v-model="agendaItem_.type" @change="handleChange">
+      <select title="Тип" v-model="agendaItem_.type" >
         <option value="other">Другое</option>
       </select>
     </div>
@@ -18,7 +18,7 @@
               class="form-control"
               placeholder="00:00"
               type="time"
-              v-model="agendaItem_.startsAt" @change="handleChange"
+              v-model="agendaItem_.startsAt"
           />
         </div>
       </div>
@@ -29,7 +29,7 @@
               class="form-control"
               placeholder="00:00"
               type="time"
-              v-model="agendaItem_.endsAt" @change="handleChange"
+              v-model="agendaItem_.endsAt"
           />
         </div>
       </div>
@@ -37,11 +37,11 @@
 
     <div class="form-group">
       <label class="form-label">Заголовок</label>
-      <input class="form-control" v-model="agendaItem_.title" @change="handleChange"/>
+      <input class="form-control" v-model="agendaItem_.title" />
     </div>
     <div class="form-group">
       <label class="form-label">Описание</label>
-      <textarea class="form-control" v-model="agendaItem_.description" @change="handleChange"></textarea>
+      <textarea class="form-control" v-model="agendaItem_.description" ></textarea>
     </div>
   </div>
 </template>
@@ -62,16 +62,18 @@ export default {
     }
   },
 
+  watch: {
+    agendaItem_: {
+      deep: true,
+      handler(newValue) {
+        this.$emit('update:agendaItem', deepClone(newValue));
+      }
+    }
+  },
   props: {
     agendaItem: {
       type: Object,
       required: true
-    }
-  },
-
-  methods: {
-    handleChange() {
-      this.$emit('change', deepClone(this.agendaItem_))
     }
   },
 }
