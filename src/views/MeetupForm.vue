@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper page container">
-    <form class="form meetup-form">
+    <form @submit.prevent="onSubmit" class="form meetup-form">
       <div class="meetup-form__content">
         <fieldset class="form-section">
           <div class="form-group">
@@ -19,6 +19,7 @@
             :agenda-item="agendaItem"
             :key="agendaItem.id"
             @remove="removeAgendaItem(idx)"
+            @change="updateAgendaItem(idx, $event)"
         />
 
         <div class="form-section_append">
@@ -91,6 +92,14 @@ export default {
     addAgendaItem() {
       const newAgendaItem = buildAgendaItem();
       this.meetup_.agenda.push(newAgendaItem);
+    },
+
+    onSubmit() {
+      this.$emit('submit', deepClone(this.meetup_))
+    },
+
+    updateAgendaItem(idx, newItem) {
+      this.meetup_.agenda.splice(idx, 1, newItem)
     }
   }
 
