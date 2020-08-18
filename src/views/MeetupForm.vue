@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper page container">
-    <form @submit.prevent="onSubmit" class="form meetup-form">
+    <form class="form meetup-form">
       <div class="meetup-form__content">
         <fieldset class="form-section">
           <div class="form-group">
             <label class="form-label">Название</label>
-            <input class="form-control" v-model="meetup_.title"/>
+            <input class="form-control" v-model="meetup_.title" @change="handleChange"/>
           </div>
           <div class="form-group">
             <label class="form-label">Место проведения</label>
-            <input class="form-control" v-model="meetup_.place"/>
+            <input class="form-control" v-model="meetup_.place" @change="handleChange"/>
           </div>
         </fieldset>
 
@@ -86,12 +86,14 @@ export default {
 
   methods: {
     removeAgendaItem(idx) {
-      this.meetup_.agenda.splice(idx, 1)
+      this.meetup_.agenda.splice(idx, 1);
+      this.handleChange();
     },
 
     addAgendaItem() {
       const newAgendaItem = buildAgendaItem();
       this.meetup_.agenda.push(newAgendaItem);
+      this.handleChange()
     },
 
     onSubmit() {
@@ -99,7 +101,12 @@ export default {
     },
 
     updateAgendaItem(idx, newItem) {
-      this.meetup_.agenda.splice(idx, 1, newItem)
+      this.meetup_.agenda.splice(idx, 1, newItem);
+      this.handleChange()
+    },
+
+    handleChange() {
+      this.$emit('change', deepClone(this.meetup_))
     }
   }
 
