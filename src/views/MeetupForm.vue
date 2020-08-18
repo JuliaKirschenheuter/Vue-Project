@@ -50,7 +50,7 @@
 <script>
 
 import MeetupAgendaItemForm from '@/views/MeetupAgendaItemForm';
-import {deepClone} from "@/utils";
+import {deepClone, deepEqual} from "@/utils";
 
 function buildAgendaItem() {
   return {
@@ -85,10 +85,19 @@ export default {
   },
 
   watch: {
+    meetup: {
+      deep: true,
+      handler(newValue) {
+        this.meetup_ = deepClone(newValue)
+      }
+    },
+
     meetup_: {
       deep: true,
       handler(newValue) {
-        this.$emit('update:meetup', deepClone(newValue));
+        if (!deepEqual(newValue, this.meetup)) {
+          this.$emit('update:meetup', deepClone(newValue));
+        }
       }
     }
   },
