@@ -11,8 +11,7 @@
         </div>
         <nav>
           <router-link v-if="$route.meta.showBackToList" :to="{name: 'index'}">&larr; Вернуться к списку</router-link>
-          <a href="#">Вход</a>
-          <a href="#">Регистрация</a>
+          <router-link :to="{name: 'admin-area'}">Вход для админа</router-link>
           <router-link :to="{name: 'new-meetup'}">Создать митап</router-link>
         </nav>
       </header>

@@ -17,6 +17,11 @@ export const router = new VueRouter({
       component: () => import('@/views/CreateNewMeetup'),
     },
     {
+      path: '/login',
+      name: 'admin-area',
+      component: () => import('@/views/AdminArea'),
+    },
+    {
       path: '/meetups/:meetupId',
       name: 'meetup-page',
       meta: {
