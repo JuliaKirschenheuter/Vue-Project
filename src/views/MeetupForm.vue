@@ -5,30 +5,29 @@
         <fieldset class="form-section">
           <div class="form-group">
             <label class="form-label">Название</label>
-            <input class="form-control" v-model="meetup_.title"/>
+            <input class="form-control" v-model="title"/>
           </div>
           <div class="form-group">
             <label class="form-label">Место проведения</label>
-            <input class="form-control" v-model="meetup_.place"/>
+            <input class="form-control" v-model="place"/>
           </div>
         </fieldset>
 
         <h3 class="form__section-title">Программа</h3>
-        <meetup-agenda-item-form
-            v-for="(agendaItem, idx) in meetup_.agenda"
-            :key="agendaItem.id"
-            @remove="removeAgendaItem(idx)"
-            :agenda-item="agendaItem"
-            @update:agendaItem="updateAgendaItem(idx, $event)"
-        />
+        <!--                         <meetup-agenda-item-form-->
+        <!--                        :agenda-item="agendaItem"-->
+        <!--                        :key="agendaItem.id"-->
+        <!--                        @remove="removeAgendaItem(idx)"-->
+        <!--                        class="mb-3"-->
+        <!--                        v-for="(agendaItem, idx) in meetup_.agenda"-->
+        <!--                        @change="updateAgendaItem(idx, $event)"-->
+        <!--                />-->
 
-        <div class="form-section_append">
-          <button type="button"
-            @click="addAgendaItem"
-          >
-            + Добавить пункт программы
-          </button>
-        </div>
+        <!--                <div class="form-section_append">-->
+        <!--                    <button @click="addAgendaItem" type="button">-->
+        <!--                        + Добавить пункт программы-->
+        <!--                    </button>-->
+        <!--                </div>-->
       </div>
 
       <div class="meetup-form__aside">
@@ -43,82 +42,66 @@
       </div>
     </form>
 
-
   </div>
 </template>
 
 <script>
 
-import MeetupAgendaItemForm from '@/views/MeetupAgendaItemForm';
-import {deepClone, deepEqual} from "@/utils";
-
-function buildAgendaItem() {
-  return {
-    id: Math.random(),
-    startsAt: '00:00',
-    endsAt: '00:00',
-    type: 'other',
-    title: null,
-    description: null,
-    speaker: null,
-    language: null,
-  };
-};
-
+// import MeetupAgendaItemForm from '@/views/MeetupAgendaItemForm';
+import {mapActions} from 'vuex';
 
 export default {
-
   name: "MeetupForm",
 
-  data() {
-    return {
-      meetup_: null
+  props: {
+    meetupId: {
+      type: [Number],
+      default: null
     }
   },
 
-  props: {
-    meetup: Object,
-  },
+  // components: {
+  //   MeetupAgendaItemForm
+  // },
 
-  components: {
-    MeetupAgendaItemForm
-  },
+  computed: {
+    meetup() {
+      return this.$store.state.forms.meetups[this.meetupId];
+    },
 
-  watch: {
-    meetup: {
-      deep: true,
-      immediate: true,
-      handler(newValue) {
-        this.meetup_ = deepClone(newValue)
+    title: {
+      set(value) {
+        this.setMeetupField({
+          meetupId: this.meetupId,
+          field: 'title',
+          value
+        })
+      },
+      get() {
+        return this.meetup.title;
       }
     },
 
-    meetup_: {
-      deep: true,
-      handler(newValue) {
-        if (!deepEqual(newValue, this.meetup)) {
-          this.$emit('update:meetup', deepClone(newValue));
-        }
+    place: {
+      set(value) {
+        this.setMeetupField({
+          meetupId: this.meetupId,
+          field: 'place',
+          value
+        })
+      },
+      get() {
+        return this.meetup.place;
       }
     }
   },
 
   methods: {
-    removeAgendaItem(idx) {
-      this.meetup_.agenda.splice(idx, 1);
-    },
-
-    addAgendaItem() {
-      const newAgendaItem = buildAgendaItem();
-      this.meetup_.agenda.push(newAgendaItem);
-    },
-
-    updateAgendaItem(idx, newItem) {
-      this.meetup_.agenda.splice(idx, 1, newItem);
-    },
+    ...mapActions('forms', {
+      setMeetupField: 'setMeetupField'
+    }),
 
   }
-
 }
 </script>
 

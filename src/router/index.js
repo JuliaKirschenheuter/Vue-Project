@@ -23,6 +23,7 @@ export const router = new VueRouter({
     },
     {
       path: '/meetups/:meetupId',
+      props: (route) => ({ meetupId: Number(route.params.meetupId) }),
       name: 'meetup-page',
       meta: {
         showBackToList: true
