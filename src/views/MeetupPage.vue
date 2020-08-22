@@ -66,12 +66,6 @@ export default {
     },
   },
 
-  watch: {
-    paramMeetupId() {
-      fetchMeetup(this.$route.params.meetupId).then(meetup => this.setLocalMeetup(meetup));
-    }
-  },
-
   mounted() {
     fetchMeetup(this.$route.params.meetupId).then(meetup => {
       this.setLocalMeetup(meetup);
