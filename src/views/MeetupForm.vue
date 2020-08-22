@@ -14,14 +14,13 @@
         </fieldset>
 
         <h3 class="form__section-title">Программа</h3>
-        <!--                         <meetup-agenda-item-form-->
-        <!--                        :agenda-item="agendaItem"-->
-        <!--                        :key="agendaItem.id"-->
-        <!--                        @remove="removeAgendaItem(idx)"-->
-        <!--                        class="mb-3"-->
-        <!--                        v-for="(agendaItem, idx) in meetup_.agenda"-->
-        <!--                        @change="updateAgendaItem(idx, $event)"-->
-        <!--                />-->
+           <meetup-agenda-item-form
+            class="mb-3"
+            v-for="(agendaItem, idx) in meetup.agenda"
+            :key="agendaItem.id"
+            :index="idx"
+            :meetup-id="meetupId"
+          />
 
           <div class="form-section_append">
               <button @click="addAgendaItem" type="button">
@@ -47,7 +46,7 @@
 
 <script>
 
-// import MeetupAgendaItemForm from '@/views/MeetupAgendaItemForm';
+import MeetupAgendaItemForm from '@/views/MeetupAgendaItemForm';
 import {mapActions} from 'vuex';
 
 const mapField = (field) => ({
@@ -59,7 +58,7 @@ const mapField = (field) => ({
     })
   },
   get() {
-    return this.meetup[field];
+    return this.$store.state.forms.meetups[this.meetupId][field];
   }
 });
 
@@ -73,9 +72,9 @@ export default {
     }
   },
 
-  // components: {
-  //   MeetupAgendaItemForm
-  // },
+  components: {
+    MeetupAgendaItemForm
+  },
 
   computed: {
     meetup() {

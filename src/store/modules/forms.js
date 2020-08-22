@@ -15,7 +15,14 @@ const actions = {
   },
   pushAgendaItem(ctx, meetupId) {
     ctx.commit('PUSH_AGENDA_ITEM', meetupId)
+  },
+  removeAgendaItem(ctx, {meetupId, index}) {
+    ctx.commit('REMOVE_AGENDA_ITEM', {meetupId, index})
+  },
+  setMeetupAgendaItemField(ctx, { meetupId, index, field, value }) {
+    ctx.commit('SET_MEETUP_AGENDA_ITEM_FIELD', { meetupId, index, field, value})
   }
+
 };
 
 const mutations = {

@@ -5,9 +5,9 @@
     </h1>
     <p>{{ $route.params.meetupId }}</p>
     <template v-if="meetup">
-      <h3> {{meetup.title}} </h3>
+      <h3> {{ meetup.title }} </h3>
       <p>
-        <router-link to="/meetups/2">Go to 2 </router-link>
+        <router-link to="/meetups/2">Go to 2</router-link>
       </p>
       <p>
         <router-link to="/meetups/3">Go to 3</router-link>
@@ -112,7 +112,9 @@ export default {
     updateMeetup() {
       this.meetup.title += '!';
       if (this.meetup.agenda.length) {
-        this.meetup.agenda[0].title += '!';
+        for (let i = 0; i < this.meetup.agenda.length; i++) {
+          this.meetup.agenda[i].title += '!';
+        }
       }
     }
 
