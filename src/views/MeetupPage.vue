@@ -94,19 +94,21 @@ export default {
     },
 
     setLocalMeetup(meetup) {
-      this.setMeetup({
-            meetupId: meetup.id,
-            meetup: {
-              id: meetup.id,
-              title: meetup.title,
-              description: meetup.description,
-              imageId: meetup.imageId,
-              date: meetup.date,
-              place: meetup.place,
-              agenda: meetup.agenda,
-            },
-          }
-      )
+      if(!this.meetup) {
+        this.setMeetup({
+              meetupId: meetup.id,
+              meetup: {
+                id: meetup.id,
+                title: meetup.title,
+                description: meetup.description,
+                imageId: meetup.imageId,
+                date: meetup.date,
+                place: meetup.place,
+                agenda: meetup.agenda,
+              },
+            }
+        )
+      }
     },
 
     updateMeetup() {
