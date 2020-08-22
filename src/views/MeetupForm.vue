@@ -50,6 +50,19 @@
 // import MeetupAgendaItemForm from '@/views/MeetupAgendaItemForm';
 import {mapActions} from 'vuex';
 
+const mapField = (field) => ({
+  set(value) {
+    this.setMeetupField({
+      meetupId: this.meetupId,
+      field,
+      value
+    })
+  },
+  get() {
+    return this.meetup[field];
+  }
+});
+
 export default {
   name: "MeetupForm",
 
@@ -68,32 +81,8 @@ export default {
     meetup() {
       return this.$store.state.forms.meetups[this.meetupId];
     },
-
-    title: {
-      set(value) {
-        this.setMeetupField({
-          meetupId: this.meetupId,
-          field: 'title',
-          value
-        })
-      },
-      get() {
-        return this.meetup.title;
-      }
-    },
-
-    place: {
-      set(value) {
-        this.setMeetupField({
-          meetupId: this.meetupId,
-          field: 'place',
-          value
-        })
-      },
-      get() {
-        return this.meetup.place;
-      }
-    }
+    title: mapField('title'),
+    place: mapField('place'),
   },
 
   methods: {
