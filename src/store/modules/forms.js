@@ -12,6 +12,9 @@ const actions = {
   },
   setMeetupField(ctx, { meetupId, field, value }) {
     ctx.commit('SET_MEETUP_FIELD', { meetupId, field, value })
+  },
+  pushAgendaItem(ctx, meetupId) {
+    ctx.commit('PUSH_AGENDA_ITEM', meetupId)
   }
 };
 

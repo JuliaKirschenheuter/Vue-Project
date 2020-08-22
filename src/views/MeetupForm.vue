@@ -23,11 +23,11 @@
         <!--                        @change="updateAgendaItem(idx, $event)"-->
         <!--                />-->
 
-        <!--                <div class="form-section_append">-->
-        <!--                    <button @click="addAgendaItem" type="button">-->
-        <!--                        + Добавить пункт программы-->
-        <!--                    </button>-->
-        <!--                </div>-->
+          <div class="form-section_append">
+              <button @click="addAgendaItem" type="button">
+                  + Добавить пункт программы
+              </button>
+          </div>
       </div>
 
       <div class="meetup-form__aside">
@@ -87,8 +87,13 @@ export default {
 
   methods: {
     ...mapActions('forms', {
-      setMeetupField: 'setMeetupField'
+      setMeetupField: 'setMeetupField',
+      pushAgendaItem: 'pushAgendaItem'
     }),
+
+    addAgendaItem(){
+      this.pushAgendaItem({meetupId: this.meetupId})
+    }
 
   }
 }
