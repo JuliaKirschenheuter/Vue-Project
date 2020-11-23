@@ -1,7 +1,9 @@
 <template>
   <div class="container">
+
     <div class="filters-panel">
       <div class="filters-panel__col">
+        <form-check :options="dateFilterOptions"></form-check>
       </div>
 
       <div class="filters-panel__col">
@@ -17,77 +19,46 @@
           </div>
         </div>
         <div class="form-group form-group_inline">
+          <page-tabs :selected.sync="filter.view"></page-tabs>
         </div>
       </div>
     </div>
 
-
-    <div v-if="meetups && meetups.length" class="meetups-list transition-list">
-      <transition-group name="transition-list">
-        <div
-            v-for="meetup in meetups"
-            :key="meetup.id"
-        >
-          <a :href="`/meetups/${meetup.id}`" class="meetups-list__item">
-            <div class="meetups-list__col">
-              <div
-                  class="meetups-list__cover"
-                  :style="meetup.cover ? `--bg-url: url('${meetup.cover}')` : ''"
-              >
-                <h5>{{ meetup.title }}</h5>
-              </div>
-            </div>
-            <div class="meetups-list__col">
-              <div class="meetups-list__description">
-        <span
-            v-if="meetup.attending"
-            class="meetups-list__badge meetups-list__badge_success"
-        >Участвую</span
-        >
-                <span v-if="meetup.organizing" class="meetups-list__badge"
-                >Организую</span
-                >
-                <ul class="info-list">
-                  <li>
-                    <app-icon icon="user" class="info-list__icon"/>
-                    {{ meetup.organizer }}
-                  </li>
-                  <li>
-                    <app-icon icon="map" class="info-list__icon"/>
-                    {{ meetup.place }}
-                  </li>
-                  <li>
-                    <app-icon icon="cal-lg" class="info-list__icon"/>
-                    <time :datetime="meetup.date">{{ meetup.localeDate }}</time>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </a>
-
-        </div>
-
-
-      </transition-group>
-    </div>
-
+      <meetups-list v-if="meetups && meetups.length" :meetups="meetups" ></meetups-list>
   </div>
 </template>
 
 <script>
 import {fetchMeetups} from '../data';
 import AppIcon from './AppIcon';
+import MeetupsList from "@/components/MeetupsList";
+import PageTabs from "@/components/PageTabs";
+import FormCheck from "@/components/FormCheck";
 
 export default {
   name: 'MeetupsPage',
 
   components: {
+    FormCheck,
+    PageTabs,
+    MeetupsList,
     AppIcon,
   },
 
   data() {
     return {
-      meetups: []
+      meetups: [],
+      filter: {
+        date: '',
+        participation: '',
+        search: '',
+        view: ''
+      },
+      dateFilterOptions:  [
+        { text: 'Все', value: '' },
+        { text: 'Прошедшие', value: 'past' },
+        { text: 'Ожидаемые', value: 'future' },
+      ]
     };
   },
 
