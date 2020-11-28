@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MeetupsCalandar"
+  name: "MeetupsCalendar"
 }
 </script>
 

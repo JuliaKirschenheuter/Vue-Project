@@ -15,6 +15,7 @@
                 class="form-control form-control_rounded form-control_sm"
                 type="text"
                 placeholder="Поиск"
+                v-model="filter.search"
             />
           </div>
         </div>
@@ -24,7 +25,7 @@
       </div>
     </div>
 
-      <meetups-list v-if="meetups && meetups.length" :meetups="meetups" ></meetups-list>
+      <meetups-list v-if="filteredMeetups && filteredMeetups.length" :meetups="filteredMeetups" ></meetups-list>
   </div>
 </template>
 
@@ -51,7 +52,7 @@ export default {
       filter: {
         date: '',
         participation: '',
-        search: '',
+        search: 'hallo',
         view: ''
       },
       dateFilterOptions:  [
@@ -66,11 +67,22 @@ export default {
     this.meetups = await this.fetchMeetups();
   },
 
+  computed: {
+    filteredMeetups() {
+      return this.meetups.filter(meetup =>
+        meetup.title.indexOf(this.filter.search) !== -1);
+    }
+  },
 
   methods: {
     async fetchMeetups() {
       return fetchMeetups();
     },
+
+    // oninput($event) {
+    //   this.filter.search = $event.target.value;
+    // }
+
   },
 };
 </script>
