@@ -29,7 +29,7 @@
           </li>
           <li>
             <app-icon icon="cal-lg" class="info-list__icon"/>
-            <time :datetime="meetup.date">{{ meetup.localeDate }}</time>
+            <time :datetime="meetup.date">{{ meetup.localDate }}</time>
           </li>
         </ul>
       </div>

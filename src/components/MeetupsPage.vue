@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {fetchMeetups} from '../data';
+import {API_URL, fetchMeetups} from '../data';
 import AppIcon from './AppIcon';
 import MeetupsList from "@/components/MeetupsList";
 import PageTabs from "@/components/PageTabs";
@@ -52,7 +52,7 @@ export default {
       filter: {
         date: '',
         participation: '',
-        search: 'hallo',
+        search: '',
         view: ''
       },
       dateFilterOptions:  [
@@ -68,8 +68,23 @@ export default {
   },
 
   computed: {
+    processedMeetups() {
+      return this.meetups.map(meetup => ({
+        ...meetup,
+          cover: meetup.imageId
+            ?  `${API_URL}/images/${meetup.imageId}` : undefined,
+          date: new Date(meetup.date),
+          localDate: new Date(meetup.date).toLocaleString(navigator.language, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+      })
+      )
+    },
+
     filteredMeetups() {
-      return this.meetups.filter(meetup =>
+      return this.processedMeetups.filter(meetup =>
         meetup.title.indexOf(this.filter.search) !== -1);
     }
   },
@@ -77,12 +92,7 @@ export default {
   methods: {
     async fetchMeetups() {
       return fetchMeetups();
-    },
-
-    // oninput($event) {
-    //   this.filter.search = $event.target.value;
-    // }
-
+    }
   },
 };
 </script>
