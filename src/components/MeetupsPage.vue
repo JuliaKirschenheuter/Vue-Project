@@ -27,8 +27,12 @@
           </div>
         </div>
         <div class="form-group form-group_inline">
-          <page-tabs :selected.sync="filter.view"
-          @change="filter.view = $event"
+<!--          <page-tabs-->
+<!--                     :selected="filter.view"-->
+<!--                     @update:selected="filter.view = $event"-->
+<!--          ></page-tabs>-->
+          <page-tabs
+              :selected.sync="filter.view"
           ></page-tabs>
         </div>
       </div>

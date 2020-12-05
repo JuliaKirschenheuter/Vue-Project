@@ -56,7 +56,7 @@ export default {
 
   methods: {
     select(value) {
-      this.$emit('change', value)
+      this.$emit('update:selected', value)
     }
   }
 }
