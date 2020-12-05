@@ -4,7 +4,7 @@
       <input
           class="form-check__input"
           type="radio"
-          name="date"
+          :name="radioGroupName"
           :value="option.value"
           :checked="option.value === selected"
           @input="$emit('selectedFormCheck', option.value) "
@@ -19,6 +19,11 @@
 <script>
 export default {
   name: "FormCheck",
+  data() {
+    return {
+      radioGroupName: Math.random()
+    }
+  },
   props: {
     options: {
       type: Array,

@@ -7,6 +7,10 @@
             :options="dateFilterOptions"
             v-model="filter.date"
         ></form-check>
+        <form-check
+            :options="secondDateFilterOptions"
+            v-model="filter.date"
+        ></form-check>
       </div>
 
       <div class="filters-panel__col">
@@ -68,12 +72,7 @@ export default {
         participation: '',
         search: '',
         view: ''
-      },
-      dateFilterOptions: [
-        {text: 'Все', value: ''},
-        {text: 'Прошедшие', value: 'past'},
-        {text: 'Ожидаемые', value: 'future'},
-      ]
+      }
     };
   },
 
@@ -139,6 +138,22 @@ export default {
       }
 
       return filteredMeetups;
+    },
+
+    dateFilterOptions() {
+      return [
+        {text: 'Все', value: ''},
+        {text: 'Прошедшие', value: 'past'},
+        {text: 'Ожидаемые', value: 'future'},
+      ]
+    },
+
+    secondDateFilterOptions() {
+      return [
+        {text: 'Все 2', value: ''},
+        {text: 'Прошедшие 2', value: 'past'},
+        {text: 'Ожидаемые 2', value: 'future'},
+      ]
     }
   },
 
