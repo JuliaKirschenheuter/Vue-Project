@@ -5,8 +5,7 @@
       <div class="filters-panel__col">
         <form-check
             :options="dateFilterOptions"
-            :selected="filter.date"
-            @selectedFormCheck="filter.date = $event"
+            v-model="filter.date"
         ></form-check>
       </div>
 

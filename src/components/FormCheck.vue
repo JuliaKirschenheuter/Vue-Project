@@ -7,7 +7,7 @@
           name="date"
           :value="option.value"
           :checked="option.value === selected"
-          @input="select(option.value)"
+          @input="$emit('selectedFormCheck', option.value) "
       />
 
       <label class="form-check__label"> {{ option.text }} </label>
@@ -26,10 +26,9 @@ export default {
     },
     selected: String
   },
-  methods: {
-    select(value) {
-      this.$emit('selectedFormCheck', value)
-    }
+  model: {
+    prop: 'selected',
+    event: 'selectedFormCheck'
   }
 }
 </script>
