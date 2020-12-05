@@ -3,7 +3,11 @@
 
     <div class="filters-panel">
       <div class="filters-panel__col">
-        <form-check :options="dateFilterOptions"></form-check>
+        <form-check
+            :options="dateFilterOptions"
+            :selected="filter.date"
+            @selectedFormCheck="filter.date = $event"
+        ></form-check>
       </div>
 
       <div class="filters-panel__col">
@@ -100,14 +104,16 @@ export default {
 
       if (this.filter.date === 'past') {
         filteredMeetups = filteredMeetups.filter(meetup => {
-          return new Date(meetup.data) <= new Date();
-        })
+         return new Date(meetup.date) <= new Date()
+        }
+        )
       }
 
       if (this.filter.date === 'future') {
         filteredMeetups = filteredMeetups.filter(meetup => {
-          return new Date(meetup.data) > new Date();
-        })
+         return new Date(meetup.date) > new Date()
+        }
+        )
       }
 
       if (this.filter.participation === 'organizing') {
