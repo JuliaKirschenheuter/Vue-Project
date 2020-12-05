@@ -25,7 +25,7 @@
       </div>
     </div>
 
-      <meetups-list v-if="filteredMeetups && filteredMeetups.length" :meetups="filteredMeetups" ></meetups-list>
+    <meetups-list v-if="filteredMeetups && filteredMeetups.length" :meetups="filteredMeetups"></meetups-list>
   </div>
 </template>
 
@@ -55,10 +55,10 @@ export default {
         search: '',
         view: ''
       },
-      dateFilterOptions:  [
-        { text: 'Все', value: '' },
-        { text: 'Прошедшие', value: 'past' },
-        { text: 'Ожидаемые', value: 'future' },
+      dateFilterOptions: [
+        {text: 'Все', value: ''},
+        {text: 'Прошедшие', value: 'past'},
+        {text: 'Ожидаемые', value: 'future'},
       ]
     };
   },
@@ -70,22 +70,59 @@ export default {
   computed: {
     processedMeetups() {
       return this.meetups.map(meetup => ({
-        ...meetup,
-          cover: meetup.imageId
-            ?  `${API_URL}/images/${meetup.imageId}` : undefined,
-          date: new Date(meetup.date),
-          localDate: new Date(meetup.date).toLocaleString(navigator.language, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+            ...meetup,
+            cover: meetup.imageId
+                ? `${API_URL}/images/${meetup.imageId}` : undefined,
+            date: new Date(meetup.date),
+            localDate: new Date(meetup.date).toLocaleString(navigator.language, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })
           })
-      })
       )
     },
 
     filteredMeetups() {
-      return this.processedMeetups.filter(meetup =>
-        meetup.title.indexOf(this.filter.search) !== -1);
+
+      let filteredMeetups = this.processedMeetups;
+
+      if (this.filter.date === 'past') {
+        filteredMeetups = filteredMeetups.filter(meetup => {
+          return new Date(meetup.data) <= new Date();
+        })
+      }
+
+      if (this.filter.date === 'future') {
+        filteredMeetups = filteredMeetups.filter(meetup => {
+          return new Date(meetup.data) > new Date();
+        })
+      }
+
+      if (this.filter.participation === 'organizing') {
+        filteredMeetups = filteredMeetups.filter(meetup => {
+          return meetup.organizing;
+        })
+      }
+
+      if (this.filter.participation === 'attending') {
+        filteredMeetups = filteredMeetups.filter(meetup => {
+          return meetup.attending;
+        })
+      }
+
+      if (this.filter.search) {
+        const concatMeetupText = meetup =>
+            [meetup.title, meetup.description, meetup.place, meetup.organizer]
+                .join(' ')
+                .toLowerCase();
+
+        filteredMeetups = filteredMeetups.filter(meetup =>
+            concatMeetupText(meetup).includes(this.filter.search.toLowerCase())
+        )
+      }
+
+      return filteredMeetups;
     }
   },
 
