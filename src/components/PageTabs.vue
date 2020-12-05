@@ -6,7 +6,9 @@
         class="page-tabs__tab"
         :class="{
         'page-tabs__tab_active': selected === '' || selected === 'list'
-      }">
+        }"
+        @click="select('list')"
+    >
       <svg
           fill="none"
           height="28"
@@ -27,7 +29,8 @@
         class="page-tabs__tab"
         :class="{
         'page-tabs__tab_active': selected === 'calendar'
-      }">
+        }"
+        @click="select('calendar')">
       <svg
           height="22"
           viewBox="0 0 20 22"
@@ -49,6 +52,12 @@ export default {
   name: "PageTabs",
   props: {
     selected: String
+  },
+
+  methods: {
+    select(value) {
+      this.$emit('change', value)
+    }
   }
 }
 </script>

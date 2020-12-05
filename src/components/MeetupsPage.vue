@@ -20,12 +20,19 @@
           </div>
         </div>
         <div class="form-group form-group_inline">
-          <page-tabs :selected.sync="filter.view"></page-tabs>
+          <page-tabs :selected.sync="filter.view"
+          @change="filter.view = $event"
+          ></page-tabs>
         </div>
       </div>
     </div>
 
-    <meetups-list v-if="filteredMeetups && filteredMeetups.length" :meetups="filteredMeetups"></meetups-list>
+    <meetups-list v-if="filter.view === '' || filter.view ==='list' "
+                  :meetups="filteredMeetups"></meetups-list>
+    <meetups-calendar
+      v-else-if="filter.view === 'calendar' "
+    ></meetups-calendar>
+    <app-empty v-else>Митапов по заданным условям не найдено...</app-empty>
   </div>
 </template>
 
@@ -35,11 +42,15 @@ import AppIcon from './AppIcon';
 import MeetupsList from "@/components/MeetupsList";
 import PageTabs from "@/components/PageTabs";
 import FormCheck from "@/components/FormCheck";
+import MeetupsCalendar from "@/components/MeetupsCalendar";
+import AppEmpty from "@/components/AppEmpty";
 
 export default {
   name: 'MeetupsPage',
 
   components: {
+    AppEmpty,
+    MeetupsCalendar,
     FormCheck,
     PageTabs,
     MeetupsList,
