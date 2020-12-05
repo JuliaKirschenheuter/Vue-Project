@@ -27,10 +27,10 @@
           </div>
         </div>
         <div class="form-group form-group_inline">
-<!--          <page-tabs-->
-<!--                     :selected="filter.view"-->
-<!--                     @update:selected="filter.view = $event"-->
-<!--          ></page-tabs>-->
+          <!--          <page-tabs-->
+          <!--                     :selected="filter.view"-->
+          <!--                     @update:selected="filter.view = $event"-->
+          <!--          ></page-tabs>-->
           <page-tabs
               :selected.sync="filter.view"
           ></page-tabs>
@@ -38,11 +38,18 @@
       </div>
     </div>
 
-    <meetups-list v-if="filter.view === '' || filter.view ==='list' "
-                  :meetups="filteredMeetups"></meetups-list>
-    <meetups-calendar
-      v-else-if="filter.view === 'calendar' "
-    ></meetups-calendar>
+    <transition
+        v-if="filteredMeetups && filteredMeetups.length"
+        name="fade"
+        mode="out-in"
+    >
+
+      <meetups-list v-if="filter.view === '' || filter.view ==='list' "
+                    :meetups="filteredMeetups"></meetups-list>
+      <meetups-calendar
+          v-else-if="filter.view === 'calendar' "
+      ></meetups-calendar>
+    </transition>
     <app-empty v-else>Митапов по заданным условям не найдено...</app-empty>
   </div>
 </template>
@@ -106,15 +113,15 @@ export default {
 
       if (this.filter.date === 'past') {
         filteredMeetups = filteredMeetups.filter(meetup => {
-         return new Date(meetup.date) <= new Date()
-        }
+              return new Date(meetup.date) <= new Date()
+            }
         )
       }
 
       if (this.filter.date === 'future') {
         filteredMeetups = filteredMeetups.filter(meetup => {
-         return new Date(meetup.date) > new Date()
-        }
+              return new Date(meetup.date) > new Date()
+            }
         )
       }
 
@@ -169,4 +176,42 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+/* Стили для анимации изменения состояния <transition> с именем fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+.transition-list {
+  position: relative;
+}
+
+.transition-list > * {
+  transition: all 0.3s ease-out;
+}
+
+/* Стили для анимации изменения состояния списка <transition-group> с именем transition-list */
+.transition-list-leave-active {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+}
+
+.transition-list-enter,
+.transition-list-leave-to {
+  opacity: 0;
+}
+
+.transition-list-move {
+  transition: transform 0.3s;
+}
+
+</style>
