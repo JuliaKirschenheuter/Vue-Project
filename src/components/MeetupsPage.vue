@@ -7,10 +7,6 @@
             :options="dateFilterOptions"
             v-model="filter.date"
         ></form-check>
-        <form-check
-            :options="secondDateFilterOptions"
-            v-model="filter.date"
-        ></form-check>
       </div>
 
       <div class="filters-panel__col">
@@ -27,10 +23,6 @@
           </div>
         </div>
         <div class="form-group form-group_inline">
-          <!--          <page-tabs-->
-          <!--                     :selected="filter.view"-->
-          <!--                     @update:selected="filter.view = $event"-->
-          <!--          ></page-tabs>-->
           <page-tabs
               :selected.sync="filter.view"
           ></page-tabs>
