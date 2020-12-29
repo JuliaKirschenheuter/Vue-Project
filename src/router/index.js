@@ -11,13 +11,17 @@ export const router = new VueRouter({
     {
       path: '/',
       name: 'index',
-      alias: '/meetups',
-      component: MeetupsPage
+      component: MeetupsPage,
+    },
+    {
+      path: '/meetups',
+      name: 'meetups-list',
+      redirect: '/'
     },
     {
       path: '/meetups/:meetupId',
       name: 'meetup-page',
       component: MeetupPage
-    }
+    },
   ]
 })
