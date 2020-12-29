@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/meetups/${meetup.id}`" class="meetups-list__item">
+  <router-link :to="{name: 'meetup-page', params: {meetupId: meetup.id}}" class="meetups-list__item">
     <div class="meetups-list__col">
       <div
           class="meetups-list__cover"
