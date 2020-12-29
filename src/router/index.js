@@ -16,10 +16,13 @@ export const router = new VueRouter({
     {
       path: '/meetups',
       name: 'meetups-list',
-      redirect: '/'
+      component: MeetupsPage,
     },
     {
       path: '/meetups/:meetupId',
+      meta: {
+        showBackToList: true
+      },
       name: 'meetup-page',
       component: MeetupPage
     },
