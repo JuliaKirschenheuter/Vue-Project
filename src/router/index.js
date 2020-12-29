@@ -11,6 +11,7 @@ export const router = new VueRouter({
     {
       path: '/',
       name: 'index',
+      alias: '/meetups',
       component: MeetupsPage
     },
     {
