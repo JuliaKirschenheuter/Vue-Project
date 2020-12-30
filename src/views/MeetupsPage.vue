@@ -48,7 +48,7 @@
 
 <script>
 import {API_URL, fetchMeetups} from '../data';
-import AppIcon from './AppIcon';
+import AppIcon from '../components/AppIcon';
 import MeetupsList from "@/components/MeetupsList";
 import PageTabs from "@/components/PageTabs";
 import FormCheck from "@/components/FormCheck";
