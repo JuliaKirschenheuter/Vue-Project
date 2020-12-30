@@ -1,11 +1,19 @@
 <template>
 
-  <div></div>
+  <div>Agenda - {{meetup.agenda.length }}</div>
 </template>
 
 <script>
 export default {
-name: "MeetupAgendaPage"
+  name: "MeetupAgendaPage",
+  props: {
+    meetup: {
+      type: Object,
+      required: true
+    }
+  }
+
+
 }
 </script>
 

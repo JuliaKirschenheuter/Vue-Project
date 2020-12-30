@@ -16,7 +16,7 @@
     <p>
       <button @click="go('meetup-agenda')">Agenda</button>
     </p>
-    <router-view/>
+    <router-view :meetup="meetup"/>
   </div>
 
 </template>
@@ -52,6 +52,13 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
+    fetchMeetup(to.params.meetupId)
+    .then(meetup => {
+      next(vm => vm.setMeetup(meetup))
+    })
+  },
+
+  beforeRouteUpdate(to, from, next) {
     if (Number(to.params.meetupId) > 3) {
       next(false);
       return;
@@ -61,17 +68,6 @@ export default {
       next(vm => vm.setMeetup(meetup))
     })
   },
-
-  // beforeRouteUpdate(to, from, next) {
-  //   if (Number(to.params.meetupId) > 3) {
-  //     next(false);
-  //     return;
-  //   }
-  //   fetchMeetup(to.params.meetupId)
-  //   .then(meetup => {
-  //     next(vm => vm.setMeetup(meetup))
-  //   })
-  // },
 
   methods: {
     go(param) {

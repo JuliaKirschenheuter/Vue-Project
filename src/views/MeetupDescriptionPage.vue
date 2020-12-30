@@ -1,10 +1,16 @@
 <template>
-<div>hallo</div>
+  <div>Description - {{meetup.description}} </div>
 </template>
 
 <script>
 export default {
-name: "MeetupDescriptionPage"
+name: "MeetupDescriptionPage",
+  props: {
+    meetup: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 
