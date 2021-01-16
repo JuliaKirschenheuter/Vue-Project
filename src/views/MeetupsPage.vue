@@ -36,11 +36,13 @@
         mode="out-in"
     >
 
-      <meetups-list v-if="filter.view === '' || filter.view ==='list' "
-                    :meetups="filteredMeetups"></meetups-list>
-      <meetups-calendar
-          v-else-if="filter.view === 'calendar' "
-      ></meetups-calendar>
+      <component :is="viewComponent"
+                 :meetups="filteredMeetups"></component>
+<!--      <meetups-list v-if="filter.view === '' || filter.view ==='list' "-->
+<!--                    :meetups="filteredMeetups"></meetups-list>-->
+<!--      <meetups-calendar-->
+<!--          v-else-if="filter.view === 'calendar' "-->
+<!--      ></meetups-calendar>-->
     </transition>
     <app-empty v-else>Митапов по заданным условям не найдено...</app-empty>
   </div>
@@ -157,6 +159,10 @@ export default {
         {text: 'Прошедшие 2', value: 'past'},
         {text: 'Ожидаемые 2', value: 'future'},
       ]
+    },
+
+    viewComponent() {
+      return this.filter.view === 'list' ? MeetupsList : MeetupsCalendar
     }
   },
 
