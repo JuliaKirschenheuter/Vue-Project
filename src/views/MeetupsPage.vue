@@ -36,13 +36,11 @@
         mode="out-in"
     >
 
-      <component :is="viewComponent"
-                 :meetups="filteredMeetups"></component>
-<!--      <meetups-list v-if="filter.view === '' || filter.view ==='list' "-->
-<!--                    :meetups="filteredMeetups"></meetups-list>-->
-<!--      <meetups-calendar-->
-<!--          v-else-if="filter.view === 'calendar' "-->
-<!--      ></meetups-calendar>-->
+      <keep-alive>
+        <component :is="viewComponent"
+                   :meetups="filteredMeetups"></component>
+      </keep-alive>
+
     </transition>
     <app-empty v-else>Митапов по заданным условям не найдено...</app-empty>
   </div>
