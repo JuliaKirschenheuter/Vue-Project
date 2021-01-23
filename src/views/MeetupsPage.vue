@@ -31,8 +31,8 @@
     </div>
 
     <div class="form-group">
-      <app-input v-model="value" ref="input">
-        <template #left-icon>
+      <app-input v-model="value" @click="showIcon = !showIcon" ref="input">
+        <template #left-icon v-if="showIcon">
           <app-icon icon="search"></app-icon>
         </template>
       </app-input>
