@@ -30,6 +30,12 @@
       </div>
     </div>
 
+
+    <div class="form-group">
+      <app-input v-model="value" />
+      <p>value = {{ value }}</p>
+    </div>
+
     <transition
         v-if="filteredMeetups && filteredMeetups.length"
         name="fade"
@@ -54,11 +60,13 @@ import PageTabs from "@/components/PageTabs";
 import FormCheck from "@/components/FormCheck";
 import MeetupsCalendar from "@/components/MeetupsCalendar";
 import AppEmpty from "@/components/AppEmpty";
+import AppInput from "../components/AppInput";
 
 export default {
   name: 'MeetupsPage',
 
   components: {
+    AppInput,
     AppEmpty,
     MeetupsCalendar,
     FormCheck,
@@ -69,6 +77,7 @@ export default {
 
   data() {
     return {
+      value: 'from parent',
       meetups: [],
       filter: {
         date: '',
