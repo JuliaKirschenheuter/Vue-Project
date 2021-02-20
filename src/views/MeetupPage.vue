@@ -71,7 +71,6 @@ export default {
 
   methods: {
     go(param) {
-      console.log('route: ', this.$route, 'router: ', this.$router)
       this.$router.push({
         name: param,
         params: {

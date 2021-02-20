@@ -24,10 +24,6 @@ export default {
     nextMonth() {
       this.month += 1;
     },
-  },
-
-  beforeDestroy() {
-    console.log('1');
   }
 }
 </script>
