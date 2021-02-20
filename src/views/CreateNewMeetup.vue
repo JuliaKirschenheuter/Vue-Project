@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper page container">
-    <meetup-form :meetup="meetup" @submit="meetup=$event">
+    <meetup-form :meetup="meetup" @change="meetup=$event">
     </meetup-form>
     <hr/>
     <button @click="updateMeetup">Update Meetup</button>
