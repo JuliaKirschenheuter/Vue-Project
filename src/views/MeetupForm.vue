@@ -5,17 +5,17 @@
         <fieldset class="form-section">
           <div class="form-group">
             <label class="form-label">Название</label>
-            <input class="form-control" v-model="meetup.title"/>
+            <input class="form-control" v-model="meetup_.title"/>
           </div>
           <div class="form-group">
             <label class="form-label">Место проведения</label>
-            <input class="form-control" v-model="meetup.place"/>
+            <input class="form-control" v-model="meetup_.place"/>
           </div>
         </fieldset>
 
         <h3 class="form__section-title">Программа</h3>
         <meetup-agenda-item-form
-            v-for="(agendaItem, idx) in meetup.agenda"
+            v-for="(agendaItem, idx) in meetup_.agenda"
             :agenda-item="agendaItem"
             :key="agendaItem.id"
             @remove="removeAgendaItem(idx)"
@@ -61,11 +61,18 @@ function buildAgendaItem() {
 }
 
 import MeetupAgendaItemForm from "@/views/MeetupAgendaItemForm";
+import { deepClone } from "@/utils";
 
 export default {
   name: "MeetupForm",
   props: {
     meetup: Object,
+  },
+  
+  data() {
+    return{
+      meetup_: deepClone(this.meetup)
+    }
   },
 
   components: {
@@ -75,11 +82,11 @@ export default {
   methods: {
     addAgendaItem (){
       const newAgendaItem = buildAgendaItem();
-      this.meetup.agenda.push(newAgendaItem);
+      this.meetup_.agenda.push(newAgendaItem);
     },
 
     removeAgendaItem(idx) {
-      this.meetup.agenda.splice(idx, 1);
+      this.meetup_.agenda.splice(idx, 1);
     }
   }
   
