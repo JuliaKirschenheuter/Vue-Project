@@ -5,20 +5,25 @@
         <fieldset class="form-section">
           <div class="form-group">
             <label class="form-label">Название</label>
-            <input class="form-control"/>
+            <input class="form-control" v-model="meetup.title"/>
           </div>
           <div class="form-group">
             <label class="form-label">Место проведения</label>
-            <input class="form-control"/>
+            <input class="form-control" v-model="meetup.place"/>
           </div>
         </fieldset>
 
         <h3 class="form__section-title">Программа</h3>
         <meetup-agenda-item-form
+            v-for="(agendaItem, idx) in meetup.agenda"
+            :agenda-item="agendaItem"
+            :key="agendaItem.id"
+            @remove="removeAgendaItem(idx)"
         />
 
         <div class="form-section_append">
-          <button type="button">
+          <button type="button"
+          @click="addAgendaItem">
             + Добавить пункт программы
           </button>
         </div>
@@ -42,6 +47,19 @@
 
 <script>
 
+function buildAgendaItem() {
+  return {
+    id: Math.random(),
+    startsAt: '00:00',
+    endsAt: '00:00',
+    type: ['other', 'new', 'new1', 'new2'],
+    title: null,
+    description: null,
+    speaker: null,
+    language: null,
+  };
+}
+
 import MeetupAgendaItemForm from "@/views/MeetupAgendaItemForm";
 
 export default {
@@ -53,6 +71,17 @@ export default {
   components: {
     MeetupAgendaItemForm
   },
+
+  methods: {
+    addAgendaItem (){
+      const newAgendaItem = buildAgendaItem();
+      this.meetup.agenda.push(newAgendaItem);
+    },
+
+    removeAgendaItem(idx) {
+      this.meetup.agenda.splice(idx, 1);
+    }
+  }
   
 }
 </script>

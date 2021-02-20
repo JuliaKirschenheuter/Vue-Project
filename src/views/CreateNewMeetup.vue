@@ -15,7 +15,7 @@ import MeetupForm from "@/views/MeetupForm";
 function buildMeetup() {
   return {
     id: null,
-    title: '',
+    title: 'almost new meetup',
     description: '',
     imageId: null,
     date: new Date(),
