@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper page container">
     <meetup-form :meetup="meetup">
-      <hr/>
-      <button @click="updateMeetup">Update Meetup</button>
-      <pre><code>{{meetup}}</code></pre>
     </meetup-form>
+    <hr/>
+    <button @click="updateMeetup">Update Meetup</button>
+    <pre><code>{{meetup}}</code></pre>
   </div>
 
 </template>
