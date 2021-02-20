@@ -21,7 +21,6 @@
               class="form-control"
               placeholder="00:00"
               type="time"
-              @change="handleChange"
               v-model="agendaItem_.startsAt"
           />
         </div>
@@ -33,7 +32,6 @@
               class="form-control"
               placeholder="00:00"
               type="time"
-              @change="handleChange"
               v-model="agendaItem_.endsAt"
           />
         </div>
@@ -43,15 +41,13 @@
     <div class="form-group">
       <label class="form-label">Заголовок</label>
       <input class="form-control"
-             v-model="agendaItem_.title"
-             @change="handleChange"/>
+             v-model="agendaItem_.title"/>
     </div>
     <div class="form-group">
       <label class="form-label">Описание</label>
       <textarea
           class="form-control"
           v-model="agendaItem_.description"
-          @change="handleChange"
       ></textarea>
     </div>
   </div>
@@ -79,11 +75,15 @@ export default {
     }
   },
 
-  methods: {
-    handleChange() {
-      this.$emit('change', deepClone(this.agendaItem_))
+  watch: {
+    agendaItem_: {
+      deep: true,
+      handler(newValue) {
+        this.$emit('change', deepClone(newValue));
+      }
     }
-  }
+  },
+
 }
 </script>
 
