@@ -79,7 +79,7 @@ export default {
     agendaItem_: {
       deep: true,
       handler(newValue) {
-        this.$emit('change', deepClone(newValue));
+        this.$emit('update:agendaItem', deepClone(newValue));
       }
     }
   },

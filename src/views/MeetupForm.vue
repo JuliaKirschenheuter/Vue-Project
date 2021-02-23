@@ -21,7 +21,7 @@
             :agenda-item="agendaItem"
             :key="agendaItem.id"
             @remove="removeAgendaItem(idx)"
-            @change="updateAgendaItem(idx, $event)"
+            @update:agendaItem="updateAgendaItem(idx, $event)"
         />
 
         <div class="form-section_append">
@@ -86,7 +86,7 @@ export default {
     meetup_: {
       deep: true,
       handler(newValue) {
-        this.$emit('change', deepClone(newValue));
+        this.$emit('update:meetup', deepClone(newValue));
       }
     }
   },
