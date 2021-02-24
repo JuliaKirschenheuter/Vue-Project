@@ -76,7 +76,7 @@ export default {
   
   data() {
     return{
-      meetup_: deepClone(this.meetup)
+      meetup_: null
     }
   },
 
@@ -87,6 +87,7 @@ export default {
   watch: {
     meetup: {
       deep: true,
+      immediate: true,
       handler(newValue) {
         this.meetup_ = deepClone(newValue)
       }

@@ -71,7 +71,7 @@ export default {
 
   data() {
     return {
-      agendaItem_: deepClone(this.agendaItem)
+      agendaItem_: null
     }
   },
 
@@ -79,6 +79,7 @@ export default {
 
     agendaItem: {
       deep: true,
+      immediate: true,
       handler(newValue) {
         this.agendaItem_ = deepClone(newValue)
       }
